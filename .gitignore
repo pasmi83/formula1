@@ -1,0 +1,17 @@
+# .gitignore
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+secret_keys.py
+/vtb/media/*
+/vtb/static/*
+/vtb_venv
+.DS_Store
+.vscode
+*.pid
+*.db
+*.rdb
+*.sqlite3
+*.code-workspace
