@@ -1,0 +1,81 @@
+@import "nullstyle.css";
+
+
+
+
+body{
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+    flex-direction: column;
+}    
+
+
+
+header{
+    
+    background:cyan;
+    display:flex;
+    justify-content: space-between;
+
+}
+.header__logo{
+    flex-basis: 250px;
+    margin: 1vw;
+
+}
+
+.header__logo img{
+    size:100%;
+}
+
+.header__enter{
+    display:flex;
+    flex-direction: column;
+    margin: 1vw;
+    justify-content: space-around;
+
+}
+
+.content{
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+    
+
+}
+.content .index{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.content .index .buttons{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 300px;
+    flex-grow:0.6;
+    margin: 1vw ;
+    
+}
+
+.content .index .buttons *{
+    margin: 4px ;
+    
+}
+
+
+
+footer{
+    background:cyan;  
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.footer__ly{
+
+}

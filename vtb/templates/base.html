@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+        <div class="header__logo">
+            <img src="{% static 'img/vtb_logo.png' %}" alt="">
+        </div>
+        
+        <div class="header__enter">
+            <p>First_name Second_name</p>
+            <button>Вход/выход</button>
+        </div>
+    </header>
+    <div class="content">
+    {% block content %}
+    {% endblock content %}
+    </div>
+    <footer>
+        <div class="footer__ly">
+        n13.tech © 2020
+        </div>
+    </footer>
+
+    
+</body>
+</html>
