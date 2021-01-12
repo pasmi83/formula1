@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{%block title%}
+<h1>Поиск участника</h1>
+<a href="{%url "pages:csv_out"%}{% if search_by_field and looking_for %}?search_by_field={{search_by_field}}&looking_for={{looking_for}}{% endif %}">CSV</a>
+{%endblock title%}
+{% block content %}
+
+<div class="userslist">
+
+<form class="filter" action="{%url 'pages:userslist'%}" method="post">
+    {% csrf_token %}
+    {{form.as_ul}}
+    <input type="submit" value="Ввод">
+</form>
+<div class="table-responsive">
+<table class="table table-responsive  table-bordered  table-striped align-middle">
+<tr>
+{% for field in fields %}
+    <th class="text-center table-dark">{{field.verbose_name}}</th>
+{% endfor %}
+</tr>
+{% for userform in current_page %}
+<tr>
+    {% for field in fields %}
+    {% with fn=field.name %}
+        <td class="text-center">{{userform|value_from_key:fn}}</td>
+    {% endwith %}
+    {% endfor %}
+</tr>
+{% endfor %}
+  
+</table>
+{% if pagination_indicator %}
+    </div>
+        {% include "partitions/_pagination.html" %}
+    </div>
+{% endif %}
+{% endblock content %}

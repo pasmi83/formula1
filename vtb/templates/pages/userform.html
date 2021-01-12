@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="messages">
+    {% for message in messages %}
+        <div {% if "error" in message.tags %}{% endif %}>
+        
+            {{message.tags}}
+            {{message.message}}
+        </div>
+    {% endfor %}
+    
+    </div>
+    <div class="fields">
+    <form action="{%url 'pages:userform'%}" method="post" class="login">
+    {% csrf_token %}
+    {% for form in userformset %}
+            
+            {{form}}
+            {% for field.error in form.fields %}
+                {{error}}
+            {% endfor %}
+    {% endfor %}
+        
+        <input type="submit" value="Enter">
+    </form>
+    </div>
+{% endblock content %}

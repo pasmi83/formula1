@@ -6,7 +6,6 @@
 body{
     display: flex;
     min-height: 100vh;
-    overflow: hidden;
     flex-direction: column;
 }    
 
@@ -29,6 +28,10 @@ header{
     size:100%;
 }
 
+.header__title{
+    align-self: center;    
+}
+
 .header__enter{
     display:flex;
     flex-direction: column;
@@ -36,8 +39,13 @@ header{
     justify-content: space-around;
 
 }
+.header__enter>a>button{
+    min-width: 150px;
+}
 
 .content{
+    display: flex;
+    flex-direction: column;
 
     flex-grow: 1;
     flex-shrink: 0;
@@ -65,7 +73,63 @@ header{
     
 }
 
+.content .login{
+    display: flex;
+    justify-content: center;
+    
+    flex-basis: 300px;
+    flex-grow:0.6;
+    margin: 1vw ;
+    
+}
 
+.content .login .fields {
+    margin: 3vw ;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.content .login .fields p{
+    margin: 3vw;
+}
+
+.content .messages {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.content .userslist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
+    margin: 1vw;
+}
+
+.content .userslist .filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1vw;
+
+}
+
+.content .userslist .filter li{
+    list-style-type: none;
+
+}
+
+.content .pagination {
+    display: flex;
+    justify-content: center;
+    align-self:flex-end;
+}
 
 footer{
     background:cyan;  

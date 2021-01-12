@@ -3,12 +3,12 @@
 
 {% block content %}
     <div class="index">
+    {% if buttons %}
         <div class="buttons">
-        <button>!!!!!!!!!!</button>
-        <button>!!!!!!!!!!</button>
-        <button>!!!!!!!!!!</button>
-        <button>!!!!!!!!!!</button>
-        
+    {% for button in buttons %}
+        <button>{{button.name}}</button>
+    {% endfor %}
         </div>
+    {% endif %}
     </div>
 {% endblock content %}

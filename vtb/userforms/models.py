@@ -41,14 +41,17 @@ class Userform(models.Model):
 
     pd_agreement = models.BooleanField(
         verbose_name='Согласие на обработку',
+        default=False,
         )
 
     email_send = models.BooleanField(
         verbose_name='Статус отправки письма',
+        default=False,
         )
 
     email_status = models.BooleanField(
         verbose_name='Статус доставки письма',
+        default=False,
         )
 
     staff_id = models.ForeignKey(
