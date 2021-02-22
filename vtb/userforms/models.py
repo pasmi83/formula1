@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from phonenumber_field.modelfields import PhoneNumberField
 
-from .validators import number_of_visitors_check
+from .validators import number_of_visitors_check, excursion_not_in_the_past
 from excursions.models import Excursion
 # Create your models here.
 
@@ -97,10 +97,11 @@ class Userform(models.Model):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.__original_excursion = self.excursion
-        #print('init!!!!', self.__original_excursion)
+        print('init!!!!', self.__original_excursion)
 
     def clean(self,*args,**kwargs):
         number_of_visitors_check(self)
+        excursion_not_in_the_past(self)
         super().clean(*args,**kwargs)
 
 
@@ -109,20 +110,26 @@ class Userform(models.Model):
         def visitor_plus(instance = self):
             excursion = Excursion.objects.get(id = instance.excursion.id)
             excursion.number_of_visitors += 1
-            excursion.save()            
+            excursion.save()
         
-        self.full_clean()
-        #print('save1',self.excursion, self.__original_excursion)
+        
         if self.__original_excursion != None and self.__original_excursion != self.excursion:
             previous_excursion = Excursion.objects.get(id = self.__original_excursion.id)
+            print('B previous_number',previous_excursion.number_of_visitors)
             previous_excursion.number_of_visitors -= 1
+            print('AFT previous_number',previous_excursion.number_of_visitors)
             previous_excursion.save()
+            print('11111self.__original_excursion!!!!',self.__original_excursion,'self.excursion!!!!!',self.excursion)
             visitor_plus()
         elif self.__original_excursion == None:
+            print('22222self.__original_excursion!!!!',self.__original_excursion,'self.excursion!!!!!',self.excursion)
             visitor_plus()
         elif self.__original_excursion == self.excursion:
             pass
-
+        elif self.__original_excursion != None and self.__original_excursion == self.excursion:
+            super().save(*args,**kwargs)
+        
+        self.full_clean()
         super().save(*args,**kwargs)
 
     class Meta:

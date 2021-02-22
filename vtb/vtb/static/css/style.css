@@ -103,6 +103,23 @@ header{
 
 }
 
+.content .userform {
+    display:flex;
+    justify-content:space-around;
+    flex-basis:100%;
+}
+
+.content .userform .field{
+    display:flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.content .userform .field li{
+    list-style-type: none;
+
+}
+
 .content .userslist {
     display: flex;
     flex-direction: column;

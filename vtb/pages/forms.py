@@ -1,4 +1,5 @@
 from django import forms
+from excursions.models import Excursion 
 
 class LoginForm(forms.Form):
     username=forms.CharField(
@@ -51,4 +52,12 @@ class UserslistFilterForm(forms.Form):
         required=False,
         )
 
+    
+class MailFilter(forms.Form):
+    for_sending = forms.ModelMultipleChoiceField(
+        label='Оповещение записавшихся на экскурсии',
+        queryset=Excursion.objects.filter(number_of_visitors__gte=1),
+        required=True,
+        widget=forms.CheckboxSelectMultiple,
+    )
     

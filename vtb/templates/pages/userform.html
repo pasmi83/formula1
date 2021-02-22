@@ -13,18 +13,19 @@
     {% endfor %}
     
     </div>
-    <div class="fields">
+    <div class="userform">
     <form action="{%url 'pages:userform'%}" method="post" class="login">
     {% csrf_token %}
     {% for form in userformset %}
-            
-            {{form}}
-            {% for field.error in form.fields %}
-                {{error}}
+        <div class="field">
+            {{form.as_ul}}
+            {% for field in form.fields %}
+                {{field.error}}
             {% endfor %}
+        </div>
     {% endfor %}
         
-        <input type="submit" value="Enter">
+        <input class="btn btn-secondary h-25 col-2" type="submit" value="Enter">
     </form>
     </div>
 {% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{%block title%}
+<h1>Оповещение</h1>
+{%endblock title%}
+
+{% block content %}
+
+<div class="userslist">
+
+<form class="filter" action="{%url 'pages:mail_filter'%}" method="post">
+    {% csrf_token %}
+    {{form.as_ul}}
+    <input type="submit" value="Ввод">
+
+</form>
+{% endblock content %}

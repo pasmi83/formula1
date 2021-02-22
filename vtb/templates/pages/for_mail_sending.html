@@ -3,14 +3,14 @@
 {% load custom_filters %}
 
 {%block title%}
-<h1>Поиск участника</h1>
+<h1>Отправка сообщений пользователям</h1>
 <a href="{%url "pages:csv_out"%}{% if search_by_field and looking_for %}?search_by_field={{search_by_field}}&looking_for={{looking_for}}{% endif %}">CSV</a>
 {%endblock title%}
 {% block content %}
 
 <div class="userslist">
 
-<form class="filter" action="{%url 'pages:userslist'%}" method="post">
+<form class="filter" action="{%url 'pages:for_mail_sending'%}" method="post">
     {% csrf_token %}
     {{form.as_ul}}
     <input type="submit" value="Ввод">
@@ -22,21 +22,23 @@
 {% for field in fields %}
     <th class="text-center table-dark">{{field.verbose_name}}</th>
 {% endfor %}
+    <th class="text-center table-dark">Отправка извещения</th>
 </tr>
 {% for userform in current_page %}
 <tr>
     {% for field in fields %}
-    {% with fn=field.name %}
-        <td class="text-center">{{userform|value_from_key:fn}}</td>
-    {% endwith %}
+        {% with fn=field.name %}
+            <td class="text-center">{{userform|value_from_key:fn}}</td>
+        {% endwith %}
     {% endfor %}
+    <td class="text-center">{% if not userform.email_send %}<a href="{%url 'pages:send_mail_to'%}?userform={{userform.id}}&shown_number={{shown_number}}"><button>Отправить сообщение</button></a>{% endif %}</td>
 </tr>
 {% endfor %}
   
 </table>
 {% if pagination_indicator %}
     </div>
-        {% include "partitions/_pagination.html" %}
+        {% include "partitions/_pagination_for_mail_sending.html" %}
     </div>
 {% endif %}
 {% endblock content %}

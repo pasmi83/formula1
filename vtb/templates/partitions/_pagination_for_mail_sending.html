@@ -1,0 +1,40 @@
+<div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+
+    {% if limit_page_indicator.first %}
+    <li class="page-item">
+      <li class="page-item"><a class="page-link" href="{%url "pages:for_mail_sending"%}?page={{current_page.paginator.page_range|first }}&shown_number={{shown_number}}{% if search_by_field and looking_for %}&search_by_field={{search_by_field}}&looking_for={{looking_for}}{% endif %}">{{current_page.paginator.page_range|first}}</a></li>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if first_page_in_current_page_range.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="{% url 'pages:for_mail_sending' %}?page= {{first_page_in_current_page_range.previous_page_number}}&shown_number={{shown_number}}{% if search_by_field and looking_for %}&search_by_field={{search_by_field}}&looking_for={{looking_for}}{% endif %}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% for pagenumber in current_page_range %}
+      <li class="page-item {% if pagenumber == current_page.number %}active{% endif %}"><a class="page-link" href="{%url "pages:for_mail_sending"%}?page={{pagenumber}}&shown_number={{shown_number}}{% if search_by_field and looking_for %}&search_by_field={{search_by_field}}&looking_for={{looking_for}}{% endif %}">{{pagenumber}}</a></li>
+    {% endfor %}
+
+    {% if last_page_in_current_page_range.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="{% url 'pages:for_mail_sending' %}?page= {{last_page_in_current_page_range.next_page_number}}&shown_number={{shown_number}}{% if search_by_field and looking_for %}&search_by_field={{search_by_field}}&looking_for={{looking_for}}{% endif %}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if limit_page_indicator.last %}
+    <li class="page-item ">
+      <li class="page-item"><a class="page-link" href="{%url "pages:for_mail_sending"%}?page={{current_page.paginator.page_range|last }}&shown_number={{shown_number}}{% if search_by_field and looking_for %}&search_by_field={{search_by_field}}&looking_for={{looking_for}}{% endif %}">{{current_page.paginator.page_range|last}}</a></li>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+</div>
